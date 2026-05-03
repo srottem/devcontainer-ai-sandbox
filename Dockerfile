@@ -38,5 +38,5 @@ WORKDIR /home/coder
 RUN mkdir -p /home/coder/workspace
 WORKDIR /home/coder/workspace
 
-CMD ["sleep", "infinity"]
+CMD ["tail", "-f", "/dev/null"]
 
