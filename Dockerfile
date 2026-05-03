@@ -38,4 +38,5 @@ WORKDIR /home/coder
 RUN mkdir -p /home/coder/workspace
 WORKDIR /home/coder/workspace
 
-CMD ["/bin/bash"]
+CMD ["sleep", "infinity"]
+
