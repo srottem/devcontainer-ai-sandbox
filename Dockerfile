@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
     nodejs npm \
     composer \
     podman \
+    gpg \
     && rm -rf /var/lib/apt/lists/*
 
-# Create non-root user for everything (including Podman)
+# Create non-root user
 RUN useradd -ms /bin/bash coder
 
 # Rootless Podman setup (must be done as root)
@@ -32,7 +33,9 @@ WORKDIR /home/coder/workspace
 # Install Claude CLI
 RUN curl -fsSL https://install.anthropic.com | sh
 
-# Install OpenCode
-RUN npm install -g opencode
+# Install OpenCode (standalone binary)
+RUN curl -L https://github.com/OpenCodeAI/opencode/releases/latest/download/opencode-linux-amd64 \
+      -o /usr/local/bin/opencode && \
+    chmod +x /usr/local/bin/opencode
 
 CMD ["/bin/bash"]
