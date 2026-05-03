@@ -22,6 +22,14 @@ RUN mkdir -p ${XDG_RUNTIME_DIR} && \
     chown coder:coder ${XDG_RUNTIME_DIR} && \
     chmod 700 ${XDG_RUNTIME_DIR}
 
+# Install Claude CLI (as root)
+RUN curl -fsSL https://install.anthropic.com | sh
+
+# Install OpenCode (standalone binary, must be root)
+RUN curl -L https://github.com/OpenCodeAI/opencode/releases/latest/download/opencode-linux-amd64 \
+      -o /usr/local/bin/opencode && \
+    chmod +x /usr/local/bin/opencode
+
 # Switch to non-root user
 USER coder
 WORKDIR /home/coder
@@ -29,13 +37,5 @@ WORKDIR /home/coder
 # Workspace
 RUN mkdir -p /home/coder/workspace
 WORKDIR /home/coder/workspace
-
-# Install Claude CLI
-RUN curl -fsSL https://install.anthropic.com | sh
-
-# Install OpenCode (standalone binary)
-RUN curl -L https://github.com/OpenCodeAI/opencode/releases/latest/download/opencode-linux-amd64 \
-      -o /usr/local/bin/opencode && \
-    chmod +x /usr/local/bin/opencode
 
 CMD ["/bin/bash"]
