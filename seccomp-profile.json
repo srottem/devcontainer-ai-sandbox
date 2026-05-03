@@ -1,0 +1,40 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "archMap": [
+    {
+      "architecture": "SCMP_ARCH_X86_64",
+      "subArchitectures": [ "SCMP_ARCH_X86", "SCMP_ARCH_X32" ]
+    }
+  ],
+  "syscalls": [
+    {
+      "names": [
+        "read", "write", "open", "close", "stat", "fstat", "lstat",
+        "poll", "lseek", "mmap", "mprotect", "munmap", "brk",
+        "rt_sigaction", "rt_sigprocmask", "rt_sigreturn",
+        "ioctl", "pread64", "pwrite64", "readv", "writev",
+        "access", "pipe", "select", "sched_yield", "mremap",
+        "msync", "mincore", "madvise", "dup", "dup2",
+        "nanosleep", "getpid", "sendfile", "socket", "connect",
+        "accept", "sendto", "recvfrom", "sendmsg", "recvmsg",
+        "shutdown", "bind", "listen", "getsockname", "getpeername",
+        "socketpair", "setsockopt", "getsockopt",
+        "clone", "execve", "exit", "wait4",
+        "kill", "uname", "fcntl", "flock", "fsync", "fdatasync",
+        "truncate", "ftruncate", "getdents", "getcwd",
+        "chdir", "fchdir", "rename", "mkdir", "rmdir",
+        "creat", "link", "unlink", "symlink", "readlink",
+        "chmod", "fchmod", "chown", "fchown", "lchown",
+        "umask", "gettimeofday", "getrlimit", "getrusage",
+        "sysinfo", "times", "getuid", "getgid",
+        "geteuid", "getegid", "setpgid", "getppid",
+        "getpgrp", "setsid", "getgroups", "setgroups",
+        "getresuid", "getresgid", "capget", "capset",
+        "rt_sigpending", "rt_sigtimedwait", "rt_sigqueueinfo",
+        "rt_sigsuspend", "sigaltstack",
+        "statfs", "fstatfs", "prctl"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}

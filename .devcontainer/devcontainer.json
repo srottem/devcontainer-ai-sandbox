@@ -1,0 +1,22 @@
+{
+  "name": "AI Sandbox Dev Container (Ubuntu 26.04 + Podman)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "coder",
+  "workspaceFolder": "/home/coder/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/coder/workspace,type=bind",
+  "runArgs": [
+    "--security-opt=no-new-privileges:true",
+    "--cap-drop=ALL",
+    "--security-opt=seccomp=.devcontainer/seccomp-profile.json"
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode"
+  ]
+}

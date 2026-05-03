@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  ai-sandbox:
+    image: ghcr.io/${USER:-you}/ai-sandbox:latest
+    container_name: ai-sandbox
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:./seccomp-profile.json
+    cap_drop:
+      - ALL
+    volumes:
+      - ${PROJECT_PATH:-.}:/home/coder/workspace:rw
+    working_dir: /home/coder/workspace
+    tty: true
