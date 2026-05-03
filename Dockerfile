@@ -11,25 +11,28 @@ RUN apt-get update && apt-get install -y \
     podman \
     && rm -rf /var/lib/apt/lists/*
 
-# Non-root user for everything (including Podman)
+# Create non-root user for everything (including Podman)
 RUN useradd -ms /bin/bash coder
-USER coder
-WORKDIR /home/coder
 
-# Rootless Podman setup (per-user storage)
+# Rootless Podman setup (must be done as root)
 ENV XDG_RUNTIME_DIR=/run/user/1000
 ENV PODMAN_USERNS=keep-id
 RUN mkdir -p ${XDG_RUNTIME_DIR} && \
+    chown coder:coder ${XDG_RUNTIME_DIR} && \
     chmod 700 ${XDG_RUNTIME_DIR}
+
+# Switch to non-root user
+USER coder
+WORKDIR /home/coder
 
 # Workspace
 RUN mkdir -p /home/coder/workspace
 WORKDIR /home/coder/workspace
 
-# Claude CLI
+# Install Claude CLI
 RUN curl -fsSL https://install.anthropic.com | sh
 
-# OpenCode
+# Install OpenCode
 RUN npm install -g opencode
 
 CMD ["/bin/bash"]
